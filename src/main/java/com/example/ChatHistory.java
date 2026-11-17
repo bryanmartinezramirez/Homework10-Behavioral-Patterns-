@@ -1,10 +1,11 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-public class ChatHistory {
+public class ChatHistory implements IterableByUser {
 
     private final List<Message> messages = new ArrayList<>();
 
@@ -31,5 +32,11 @@ public class ChatHistory {
 
     public List<Message> getMessages() {
         return List.copyOf(messages);
+    }
+
+    @Override
+    public Iterator<Message> iterator(User userToSearchWith) {
+        return new searchMessagesByUser(
+            getMessages(), userToSearchWith);
     }
 }
