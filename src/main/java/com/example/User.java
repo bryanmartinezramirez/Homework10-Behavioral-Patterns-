@@ -2,9 +2,10 @@ package com.example;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.List;
 
-public class User {
+public class User implements IterableByUser {
 
     private final String name;
     private final ChatServer server;
@@ -67,5 +68,10 @@ public class User {
 
     public void blockUser(User senderToBlock) {
         server.blockUser(this, senderToBlock);
+    }
+
+    @Override
+    public Iterator<Message> iterator(User userToSearchWith) {
+        return history.iterator(userToSearchWith);
     }
 }
